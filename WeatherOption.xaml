@@ -1,0 +1,52 @@
+﻿<l:PluginGuiWindow x:Class="OWMDevice.WeatherOption"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:MLS.HA.DeviceController.Common.Gui;assembly=MLS.HA.DeviceController.Common"
+             mc:Ignorable="d" Title="InControl Home Automation"
+             Width="453.047" Height="281.047" ResizeMode="NoResize">
+
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Row="0" Margin="0,0,0,10">
+            <TabItem Header="Weather options">
+                <Grid>
+                    <StackPanel>
+                        <Label Content="Please register first on OpenWeatherMap." Margin="0,0,10,0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="API Key:" Width="115"/>
+                            <TextBox Width="307" x:Name="txtApiKey"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Latitude:" Margin="0,0,46,0" Width="69"/>
+                            <TextBox Width="177" x:Name="txtLat"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Longitude:" Margin="0,0,49,0"/>
+                            <TextBox Width="177" x:Name="txtLng"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Signs:" Margin="0,0,49,0" Width="67"/>
+                            <RadioButton x:Name="radioImperial" Content="Imperial" Width="114" Height="24" Margin="0,5,0,0"/>
+                            <RadioButton x:Name="radioMetric" Content="Metric" Width="127" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Right" Grid.Row="1">
+            <ProgressBar Name="pbStatus" IsIndeterminate="True" Visibility="Hidden" Margin="5,0,0,0"></ProgressBar>
+            <Button x:Name="btnSave" Content="Save" Margin="0,0,7,0" Click="btnSave_Click" Padding="5" Height="30" VerticalAlignment="Top"></Button>
+            <Button Name="btnCancel" Content="Cancel" Margin="0,0,7,0" Click="btnCancel_click" Padding="5"/>
+        </StackPanel>
+
+
+    </Grid>
+</l:PluginGuiWindow>
