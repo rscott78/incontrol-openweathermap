@@ -18,9 +18,13 @@
             <TabItem Header="Weather options">
                 <Grid>
                     <StackPanel>
-                        <Label Content="Please register first on OpenWeatherMap." Margin="0,0,10,0"/>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="API Key:" Width="115"/>
+                            <Label Content="Please register first on" Margin="0,0,0,0" >
+                            </Label>
+                            <TextBlock TextDecorations="Underline" Foreground="Blue" Margin="0,5,0,0" MouseDown="Label_MouseDown">OpenWeatherMap.org</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock TextDecorations="Underline" Foreground="Blue" Width="108" Margin="7,3,0,0" MouseDown="lblApiKey_down">API Key:</TextBlock>
                             <TextBox Width="307" x:Name="txtApiKey"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">

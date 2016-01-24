@@ -1,4 +1,4 @@
-﻿using MLS.Common;
+﻿//using MLS.Common;
 using MLS.HA.DeviceController.Common;
 using MLS.HA.DeviceController.Common.Device;
 using MLS.HA.DeviceController.Common.HaControllerInterface;
@@ -123,12 +123,7 @@ namespace OWMDevice
                     if (config != null)
                     {
 
-                        latitude = GetAppSetting(config, "Lat");
-                        longitude = GetAppSetting(config, "Lng");
-
-                        unitsDisplay = GetAppSetting(config, "Signs") == "metric" ? "metric" : "imperial" ;
-
-                        apiKey = GetAppSetting(config, "ApiKey"); 
+                        loadSettings();
                         
                         pollingThread.Start();
 
@@ -154,6 +149,13 @@ namespace OWMDevice
             }
         }
 
+        private void loadSettings() {
+            latitude = GetAppSetting(config, WeatherOption.SETTING_LAT);
+            longitude = GetAppSetting(config, WeatherOption.SETTING_LONG);
+            unitsDisplay = GetAppSetting(config, WeatherOption.SETTING_SIGNS) == "metric" ? "metric" : "imperial";
+            apiKey = GetAppSetting(config, WeatherOption.SETTING_APIKEY);
+        }
+
 
         DateTime lastPollTimeWeather = DateTime.Now;
         long lastWeatherUnixTimeStamp = 0;
@@ -162,33 +164,27 @@ namespace OWMDevice
         dynamic weatherForcast = null;
 
 
-        string GetAppSetting(Configuration config, string key)
-        {
-            KeyValueConfigurationElement element = config.AppSettings.Settings[key];
-            if (element != null)
-            {
-                string value = element.Value;
-                if (!string.IsNullOrEmpty(value))
-                    return value;
-            }
-            return string.Empty;
+        public string GetAppSetting(Configuration config, string key) {            
+            return getDbSetting(key);
         }
 
         /// <summary>
         /// Talks to the API and gathers data for each of the devices.
         /// </summary>
         public void pollWeather()
-        {
-            
+        {           
 
             while (isRunning)
             {
                 try
-                {
+                {                   
+                    
+                    // Do this each time in case the user changes settings
+                    // This also fixes it so the user doesn't have to restart InControl after the initial setup                 
+                    loadSettings();
+
                     // 10 min between fetching data
-
                     FetchWeatherData();
-
                     FetchWeatherForcastData();
 
                     foreach (var d in localDevices)
@@ -201,6 +197,8 @@ namespace OWMDevice
 
                                 double _weatherCon = getWeatherConData();
                                 double _forcastWeatherCon3H = getForcastWeatherCon3HData();
+
+                                d.level = getTempData();
 
                                 setReading(d, OWMDataTypes.Temp, getTempData(), getTempSign());
                                 setReading(d, OWMDataTypes.Clouds, getCloudsData(), "%");

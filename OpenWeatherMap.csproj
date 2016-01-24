@@ -41,10 +41,10 @@
       <HintPath>Incontrol\MLS.HA.DeviceController.dll</HintPath>
     </Reference>
     <Reference Include="MLS.HA.DeviceController.Common">
-      <HintPath>Incontrol\MLS.HA.DeviceController.Common.dll</HintPath>
+      <HintPath>..\..\DeployOutput\MLS.HA.DeviceController.Common.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\DeployOutput\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
